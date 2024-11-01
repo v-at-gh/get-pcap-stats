@@ -8,7 +8,7 @@ import (
 )
 
 func processFiles(files []string, args []string) {
-	sem := make(chan struct{}, parallelism)
+	sem := make(chan struct{}, workers)
 	var wg sync.WaitGroup
 	totalFiles := len(files)
 

@@ -31,7 +31,7 @@ go build
 | Option         | Description                                                                                             | Default                     |
 |----------------|---------------------------------------------------------------------------------------------------------|-----------------------------|
 | `-dir`         | Directory to search for `.pcap` or `.pcapng` files.                                                     | `.` (current directory)     |
-| `-stats`       | Space-separated statistics types or path to a file containing stats types to pass to `tshark`.          | (several predefined stats)  |
+| `-stats`       | Space-separated statistics types or path to a file containing stats types to pass to `tshark`.          | (all supported stats)       |
 | `-suffix`      | Suffix for resulting statistics files.                                                                  | `.total-stats.txt`          |
 | `-overwrite`   | If set, overwrites existing statistics files.                                                           | `false`                     |
 | `-yes`         | If set, skips confirmation prompt before processing files.                                              | `false`                     |
