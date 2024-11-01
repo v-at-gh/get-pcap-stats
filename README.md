@@ -4,7 +4,7 @@ A Go tool to collect various statistics from `.pcap` or `.pcapng` files using [t
 
 ## Overview
 
-This tool scans a directory for `.pcap` and `.pcapng` files and generates various statistical summaries for each file. The statistics are gathered using `tshark`, which allows for customizable and in-depth analysis of network data. Results are saved as text files with a specified suffix.
+This tool scans a directory for `.pcap` and `.pcapng` files and generates various statistical summaries for each file. The statistics are gathered using `tshark`, which allows for customizable and in-depth analysis of network data. Results are saved as text files with a specified suffix. All statistics-related types are available at [tshark manpage](https://www.wireshark.org/docs/man-pages/tshark.html).
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This tool scans a directory for `.pcap` and `.pcapng` files and generates variou
 Clone the repository and build the Go binary:
 
 ```bash
-git clone https://github.com/yourusername/get-pcap-stats.git
+git clone https://github.com/v-at-gh/get-pcap-stats.git
 cd get-pcap-stats
 go build
 ```
@@ -23,7 +23,7 @@ go build
 ## Usage
 
 ```bash
-./get-pcap-stats [options]
+./get-pcap-stats.exe [options]
 ```
 
 ### Options
@@ -35,30 +35,30 @@ go build
 | `-suffix`      | Suffix for resulting statistics files.                                                                  | `.total-stats.txt`          |
 | `-overwrite`   | If set, overwrites existing statistics files.                                                           | `false`                     |
 | `-yes`         | If set, skips confirmation prompt before processing files.                                              | `false`                     |
-| `-workers`     | Number of files to process in parallel.                                                                 | `NumCPU`                    |
+| `-workers`     | Number of files to process in parallel.                                                                 | CPU count                   |
 
 ### Examples
 
 1. Process all `.pcap` files in the current directory and save results with `.summary.txt` suffix:
    ```bash
-   ./get-pcap-stats -suffix ".summary.txt"
+   ./get-pcap-stats.exe -suffix ".summary.txt"
    ```
 
 2. Process files in `/path/to/pcap` directory, overwriting any existing results:
    ```bash
-   ./get-pcap-stats -dir /path/to/pcap -overwrite
+   ./get-pcap-stats.exe -dir /path/to/pcap -overwrite
    ```
 
 3. Specify custom statistics types via a text file (one per line):
    ```bash
-   ./get-pcap-stats -stats "path/to/stats_file.txt"
+   ./get-pcap-stats.exe -stats "path/to/stats_file.txt"
    ```
 
 4. Find files in current directory and gather UDP statistics without confirmation prompt:
    ```bash
-   ./get-pcap-stats -yes -stats "conv,udp endpoints,udp" -suffix ".stats-udp.txt"
+   ./get-pcap-stats.exe -yes -stats "conv,udp endpoints,udp" -suffix ".stats-udp.txt"
    ```
 
 ## License
 
-MIT License. See `LICENSE` for details.
+MIT License. See [LICENSE](./LICENSE) for details.
