@@ -26,3 +26,7 @@ go.work.sum
 
 # Test payload
 *.list
+test.d/
+*.pcap
+*.pcapng
+*.txt
