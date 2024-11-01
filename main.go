@@ -132,27 +132,9 @@ func processFile(filePath string, index int, totalFiles int, args []string) {
 
 func buildArgs(statsOption string) ([]string, error) {
 	args := []string{"-q"}
-
 	var stats []string
 
-	if fileExists(statsOption) {
-		file, err := os.Open(statsOption)
-		if err != nil {
-			return nil, fmt.Errorf("failed to open stats file: %w", err)
-		}
-		defer file.Close()
-
-		scanner := bufio.NewScanner(file)
-		for scanner.Scan() {
-			stats = append(stats, scanner.Text())
-		}
-
-		if err := scanner.Err(); err != nil {
-			return nil, fmt.Errorf("failed to read stats file: %w", err)
-		}
-	} else if statsOption != "" {
-		stats = strings.Fields(statsOption)
-	} else {
+	if statsOption == "" {
 		stats = []string{
 			"afp,srt", "ancp,tree",
 			"ansi_a,bsmap", "ansi_a,dtap", "ansi_map",
@@ -208,6 +190,23 @@ func buildArgs(statsOption string) ([]string, error) {
 			"someip_messages,tree", "someipsd_entries,tree", "ssprotocol,stat",
 			"sv", "ucp_messages,tree", "wsp,stat",
 		}
+	} else if fileExists(statsOption) {
+		file, err := os.Open(statsOption)
+		if err != nil {
+			return nil, fmt.Errorf("failed to open stats file: %w", err)
+		}
+		defer file.Close()
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			stats = append(stats, scanner.Text())
+		}
+
+		if err := scanner.Err(); err != nil {
+			return nil, fmt.Errorf("failed to read stats file: %w", err)
+		}
+	} else {
+		stats = strings.Fields(statsOption)
 	}
 
 	for _, stat := range stats {
